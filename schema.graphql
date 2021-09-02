@@ -1,0 +1,91 @@
+schema {
+    query: Query
+    mutation: Mutation
+}
+
+type term {
+    min: Int!
+    max: Int!
+}
+
+type amount {
+    min: Int!
+    max: Int!
+}
+
+type processingTime {
+    min: Int!
+    max: Int!
+}
+
+type age {
+    min: Int!
+    max: Int!
+}
+
+type requirements {
+    age: age
+    income: Int!
+    income_proof: Boolean!
+    documents: [String!]
+    ukrain_nationality: Boolean
+    special: String
+}
+
+type Offer {
+    id: ID!
+    title: String!
+    logotype: String!
+    description: String!
+    is_show: Boolean
+    link: String!
+    rate: Float!
+    term: term
+    amount: amount
+    rating: Int!
+    processing_time: processingTime
+    processing_methods: [String!]
+    requirements: requirements
+}
+
+type OfferResult {
+    success: Boolean!
+    errors: [String]
+    offer: Offer
+}
+
+type OffersResult {
+    success: Boolean!
+    errors: [String]
+    offers: [Offer]
+}
+
+type Query {
+    listOffers: OffersResult!
+    getOffer(id: ID!): OfferResult!
+}
+
+type Mutation {
+    addOffer(
+        title: String!,
+        description: String!,
+        logotype: String!,
+        link: String!,
+        rate: Float!,
+        amountMin: Int!,
+        amountMax: Int!,
+        termMin: Int!,
+        termMax: Int!,
+        rating: Int!,
+        processingTimeMin: Int!,
+        processingTimeMax: Int!,
+        processingMethods: String!,
+        requirementsAgeMin: Int!,
+        requirementsAgeMax: Int!,
+        requirementsIncome: Int,
+        requirementsIncomeProof: Boolean!,
+        requirementsDocuments: String!,
+        requirementsUkrainNationality: Boolean!
+        requirementsSpecial: String,
+    ): OfferResult
+}
