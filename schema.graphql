@@ -114,6 +114,30 @@ type Mutation {
         requirementsSpecial: String,
     ): OfferResult
 
+    updateOffer(
+        id: ID!,
+        title: String,
+        description: String,
+        logotype: String,
+        link: String,
+        rate: Float,
+        amountMin: Int,
+        amountMax: Int,
+        termMin: Int,
+        termMax: Int,
+        rating: Int,
+        processingTimeMin: Int,
+        processingTimeMax: Int,
+        processingMethods: String,
+        requirementsAgeMin: Int,
+        requirementsAgeMax: Int,
+        requirementsIncome: Int,
+        requirementsIncomeProof: Boolean,
+        requirementsDocuments: String,
+        requirementsUkrainNationality: Boolean
+        requirementsSpecial: String,
+    ): OfferResult
+
     addUser(
         name: String,
         permission: String!
