@@ -1,7 +1,7 @@
 from flask import Flask
 from flask_cors import CORS
 from flask_sqlalchemy import SQLAlchemy
-from config import DB_LINK
+from .config import DB_LINK
 
 app = Flask(__name__)
 CORS(app)
