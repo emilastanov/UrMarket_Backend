@@ -83,11 +83,31 @@ type state {
     success: Boolean!
 }
 
+type FAQ {
+    id: ID!,
+    language: String!,
+    answer: String!,
+    question: String!
+}
+
+type FAQListResult {
+    success: Boolean!
+    errors: [String]
+    list_faq: [FAQ]
+}
+
+type FAQResult {
+    success: Boolean!
+    errors: [String]
+    faq: FAQ
+}
+
 type Query {
     listOffers: OffersResult!
     getOffer(id: ID!): OfferResult!
     listUsers: UsersResult!
     getUser(id: ID!): UserResult!
+    listFAQ(language: String): FAQListResult!
 }
 
 type Mutation {
@@ -148,8 +168,29 @@ type Mutation {
     ): state
 
     updateUser(
-        id: ID!
+        id: ID!,
         name: String!
     ): UserResult
+
+    addFAQ(
+        language: String!,
+        answer: String!,
+        question: String!
+    ): FAQResult
+
+    updateFAQ(
+        id: ID!,
+        language: String,
+        answer: String,
+        question: String
+    ): FAQResult
+
+    removeFAQ(
+        id: ID!
+    ): state
+
+    removeOffer(
+        id: ID!
+    ): state
 }
 

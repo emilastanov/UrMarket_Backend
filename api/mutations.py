@@ -84,6 +84,17 @@ def update_offer_resolver(obj, info, id, title=None, description=None, logotype=
     return payload
 
 
+@isAuthenticated('admin', 'editor')
+def remove_offer_resolver(obj, info, id):
+    Offer.query.filter(Offer.id == id).delete()
+    db.session.commit()
+
+    payload = {
+        "success": True
+    }
+
+    return payload
+
 def genKey():
     k = ""
     u = 1
@@ -132,6 +143,58 @@ def update_user_resolver(obj, info, id,name):
     payload = {
         "success": True,
         "user": user.to_dict()
+    }
+
+    return payload
+
+
+@isAuthenticated('admin', 'editor')
+def add_faq_resolver(obj, info, language, question, answer):
+    faq = FAQ(
+        language=language,
+        question=question,
+        answer=answer
+    )
+
+    db.session.add(faq)
+    db.session.commit()
+
+    payload = {
+        "success": True,
+        "faq": faq.to_dict()
+    }
+
+    return payload
+
+
+@isAuthenticated('admin', 'editor')
+def update_faq_resolver(obj, info, id, language=None, question=None, answer=None):
+    faq = FAQ.query.get(id)
+    if language:
+        faq.language = language
+    if question:
+        faq.question = question
+    if answer:
+        faq.answer = answer
+
+    db.session.add(faq)
+    db.session.commit()
+
+    payload = {
+        "success": True,
+        "faq": faq.to_dict()
+    }
+
+    return payload
+
+
+@isAuthenticated('admin', 'editor')
+def remove_faq_resolver(obj, info, id):
+    FAQ.query.filter(FAQ.id == id).delete()
+    db.session.commit()
+
+    payload = {
+        "success": True
     }
 
     return payload

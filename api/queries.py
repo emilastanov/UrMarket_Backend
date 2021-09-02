@@ -63,3 +63,21 @@ def getUser_resolver(obj, info, id):
         }
 
     return payload
+
+
+def listFAQ_resolver(obj,info, language=None):
+    try:
+        if language:
+            faqs = [faq.to_dict() for faq in FAQ.query.filter(FAQ.language == language)]
+        else:
+            faqs = [faq.to_dict() for faq in FAQ.query.all()]
+        payload = {
+            "success": True,
+            "list_faq": faqs
+        }
+    except Exception as error:
+        payload = {
+            "success": False,
+            "errors": [str(error)]
+        }
+    return payload

@@ -1,5 +1,6 @@
 from api import db
 
+
 class Offer(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String)
@@ -23,6 +24,7 @@ class Offer(db.Model):
     requirementsDocuments = db.Column(db.Text)
     requirementsUkrainNationality = db.Column(db.Boolean)
     requirementsSpecial = db.Column(db.Text)
+
     def to_dict(self):
         return {
             "id": self.id,
@@ -64,10 +66,26 @@ class AuthKey(db.Model):
     key = db.Column(db.String)
     name = db.Column(db.String)
     permission = db.Column(db.String) #admin | editor
+
     def to_dict(self):
         return {
             "id": self.id,
             "key": self.key,
             "name": self.name,
             "permission": self.permission
+        }
+
+
+class FAQ(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    language = db.Column(db.String)
+    question = db.Column(db.String)
+    answer = db.Column(db.String)
+
+    def to_dict(self):
+        return {
+            "id": self.id,
+            "language": self.language,
+            "question": self.question,
+            "answer": self.answer
         }
