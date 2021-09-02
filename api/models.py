@@ -58,3 +58,16 @@ class Offer(db.Model):
                 "special": self.requirementsSpecial
             }
         }
+
+class AuthKey(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    key = db.Column(db.String)
+    name = db.Column(db.String)
+    permission = db.Column(db.String) #admin | editor
+    def to_dict(self):
+        return {
+            "id": self.id,
+            "key": self.key,
+            "name": self.name,
+            "permission": self.permission
+        }

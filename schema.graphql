@@ -60,9 +60,34 @@ type OffersResult {
     offers: [Offer]
 }
 
+type User {
+    id: ID!
+    name: String
+    key: String!
+    permission: String!
+}
+
+type UsersResult {
+    success: Boolean!
+    errors: [String]
+    users: [User]
+}
+
+type UserResult {
+    success: Boolean!
+    errors: [String]
+    user: User
+}
+
+type state {
+    success: Boolean!
+}
+
 type Query {
     listOffers: OffersResult!
     getOffer(id: ID!): OfferResult!
+    listUsers: UsersResult!
+    getUser(id: ID!): UserResult!
 }
 
 type Mutation {
@@ -88,4 +113,19 @@ type Mutation {
         requirementsUkrainNationality: Boolean!
         requirementsSpecial: String,
     ): OfferResult
+
+    addUser(
+        name: String,
+        permission: String!
+    ): UserResult
+
+    removeUser(
+        id: ID!
+    ): state
+
+    updateUser(
+        id: ID!
+        name: String!
+    ): UserResult
 }
+

@@ -13,8 +13,13 @@ mutation = ObjectType("Mutation")
 
 query.set_field("listOffers", listOffers_resolver)
 query.set_field("getOffer", getOffer_resolver)
+query.set_field("listUsers", listUsers_resolver)
+query.set_field("getUser", getUser_resolver)
 
 mutation.set_field("addOffer", add_offer_resolver)
+mutation.set_field("addUser", add_user_resolver)
+mutation.set_field("removeUser", remove_user_resolver)
+mutation.set_field("updateUser", update_user_resolver)
 
 type_defs = load_schema_from_path("schema.graphql")
 schema = make_executable_schema(

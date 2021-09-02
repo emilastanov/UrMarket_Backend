@@ -1,9 +1,10 @@
-from .models import Offer
+from .models import *
 from ariadne import convert_kwargs_to_snake_case
+from .resolvers import isAuthenticated
+
 def listOffers_resolver(obj, info):
     try:
         offers = [offer.to_dict() for offer in Offer.query.all()]
-        print(offers)
         payload = {
             "success": True,
             "offers": offers
@@ -28,4 +29,37 @@ def getOffer_resolver(obj, info, id):
             "success": False,
             "errors": ["Post item matching {id} not found"]
         }
+    return payload
+
+
+@isAuthenticated('admin')
+def listUsers_resolver(obj,info):
+    try:
+        users = [user.to_dict() for user in AuthKey.query.all()]
+        payload = {
+            "success": True,
+            "users": users
+        }
+    except Exception as error:
+        payload = {
+            "success": False,
+            "errors": [str(error)]
+        }
+    return payload
+
+
+@isAuthenticated('editor', 'admin')
+def getUser_resolver(obj, info, id):
+    try:
+        user = AuthKey.query.get(id)
+        payload = {
+            "success": True,
+            "user": user.to_dict()
+        }
+    except Exception as error:
+        payload = {
+            "success": False,
+            "errors": [str(error)]
+        }
+
     return payload
