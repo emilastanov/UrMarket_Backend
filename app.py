@@ -7,6 +7,10 @@ from ariadne.constants import PLAYGROUND_HTML
 from flask import request, jsonify
 from api.queries import *
 from api.mutations import *
+from api.config import CLOUDINARY
+import cloudinary
+import cloudinary.uploader
+from flask import request
 
 query = ObjectType("Query")
 mutation = ObjectType("Mutation")
@@ -55,3 +59,8 @@ def graphql_server():
     )
     status_code = 200 if success else 400
     return jsonify(result), status_code
+
+@app.route("/image", methods=["POST"])
+def upload_img():
+    cloudinary.config(**CLOUDINARY)
+    return jsonify({"out": cloudinary.uploader.upload(request.files['image'])['url']})
