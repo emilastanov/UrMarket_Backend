@@ -212,7 +212,14 @@ def add_review_resolver(obj, info, name, market, text, rating, company):
         db.session.commit()
         payload = {
             "success": True,
-            "review": review
+            "review": {
+                "id": review.id,
+                "text": review.text,
+                "rating": review.rating,
+                "market": review.market,
+                "name": review.name,
+                "company": Offer.query.get(review.company)
+            }
         }
 
     return payload
