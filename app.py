@@ -63,4 +63,5 @@ def graphql_server():
 @app.route("/image", methods=["POST"])
 def upload_img():
     cloudinary.config(**CLOUDINARY)
-    return jsonify({"out": cloudinary.uploader.upload(request.files['image'])['url']})
+    link = cloudinary.uploader.upload(request.files['image'])['url'].split('/')
+    return jsonify({"out": '/'.join(link[:-2]+['w_400,h_200,c_fill']+link[-2:])})
