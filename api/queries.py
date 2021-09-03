@@ -81,3 +81,37 @@ def listFAQ_resolver(obj,info, language=None):
             "errors": [str(error)]
         }
     return payload
+
+
+def listReviews_resolver(obj, info, market=None):
+    try:
+        if market:
+            reviews = [review.to_dict() for review in Review.query.filter(Review.market == market)]
+        else:
+            reviews = [review.to_dict() for review in Review.query.all()]
+        payload = {
+            "success": True,
+            "reviews": reviews
+        }
+    except Exception as error:
+        payload = {
+            "success": False,
+            "errors": [str(error)]
+        }
+    return payload
+
+def getContent_resolver(obj, info, market):
+    try:
+        content = Content.query.filter(Content.market == market).first()
+        payload = {
+            "success": True,
+            "content": content.to_dict()
+        }
+    except Exception as error:
+        payload = {
+            "success": False,
+            "errors": [str(error)]
+        }
+
+    return payload
+

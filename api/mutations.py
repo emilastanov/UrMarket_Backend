@@ -199,3 +199,176 @@ def remove_faq_resolver(obj, info, id):
 
     return payload
 
+
+def add_review_resolver(obj, info, name, market, text, rating, company):
+    if Review.query.filter(Review.text == text).count():
+        payload = {
+            "success": False,
+            "errors": ["Dublicated"]
+        }
+    else:
+        review = Review(name=name, market=market, text=text, rating=rating, company=company)
+        db.session.add(review)
+        db.session.commit()
+        payload = {
+            "success": True,
+            "review": review
+        }
+
+    return payload
+
+
+@isAuthenticated('admin', 'editor')
+def remove_review_resolver(obj, info, id):
+    Review.query.filter(Review.id == id).delete()
+    db.session.commit()
+
+    payload = {
+        "success": True
+    }
+
+    return payload
+
+
+@isAuthenticated('admin', 'editor')
+def add_content_resolver(obj, info, logotype, language, market, title, metaTitle, metaDescription, metaKeywords, header,
+               description, calcAmountLabel, calcAmountPlaceholder, calcTermLabel, calcTermPlaceholder, adsParagraph,
+               adsImage, filterHeader, filterAmount, filterTerm, filterRate, filterPopular, footerParagraph,
+               footerPartnersHeader, topTitle, footerLegalAddress, topTableColumnAmount, topTableColumnTerm,
+               topTableColumnRate, reviewHeader, reviewFormName, reviewFormSelectOrganization,
+               reviewFormInputPlaceholder, reviewFormRating, reviewFormButton, reviewSuccessMessage, reviewListHeader,
+               reviewListLoader):
+    content = Content(logotype=logotype, language=language, market=market, title=title, metaTitle=metaTitle,
+                      metaDescription=metaDescription, metaKeywords=metaKeywords, header=header,
+                      description=description, calcAmountLabel=calcAmountLabel,
+                      calcAmountPlaceholder=calcAmountPlaceholder, calcTermLabel=calcTermLabel,
+                      calcTermPlaceholder=calcTermPlaceholder, adsParagraph=adsParagraph, adsImage=adsImage,
+                      filterHeader=filterHeader, filterAmount=filterAmount, filterTerm=filterTerm,
+                      filterRate=filterRate, filterPopular=filterPopular, footerParagraph=footerParagraph,
+                      footerPartnersHeader=footerPartnersHeader, topTitle=topTitle,
+                      footerLegalAddress=footerLegalAddress, topTableColumnAmount=topTableColumnAmount,
+                      topTableColumnTerm=topTableColumnTerm, topTableColumnRate=topTableColumnRate,
+                      reviewHeader=reviewHeader, reviewFormName=reviewFormName,
+                      reviewFormSelectOrganization=reviewFormSelectOrganization,
+                      reviewFormInputPlaceholder=reviewFormInputPlaceholder,
+                      reviewFormRating=reviewFormRating, reviewFormButton=reviewFormButton,
+                      reviewSuccessMessage=reviewSuccessMessage, reviewListHeader=reviewListHeader,
+                      reviewListLoader=reviewListLoader)
+
+    db.session.add(content)
+    db.session.commit()
+
+    payload = {
+        "success": True,
+        "content": content
+    }
+
+    return payload
+
+
+@isAuthenticated('admin', 'editor')
+def update_content_resolver(obj, info, id, logotype=None, language=None, market=None, title=None, metaTitle=None,
+                            metaDescription=None, metaKeywords=None, header=None, description=None,
+                            calcAmountLabel=None, calcAmountPlaceholder=None, calcTermLabel=None,
+                            calcTermPlaceholder=None, adsParagraph=None, adsImage=None, filterHeader=None,
+                            filterAmount=None, filterTerm=None, filterRate=None, filterPopular=None,
+                            footerParagraph=None, footerPartnersHeader=None, topTitle=None, footerLegalAddress=None,
+                            topTableColumnAmount=None, topTableColumnTerm=None, topTableColumnRate=None,
+                            reviewHeader=None, reviewFormName=None, reviewFormSelectOrganization=None,
+                            reviewFormInputPlaceholder=None, reviewFormRating=None, reviewFormButton=None,
+                            reviewSuccessMessage=None, reviewListHeader=None, reviewListLoader=None):
+
+    content = Content.query.get(id)
+    if logotype:
+        content.logotype = logotype
+    if language:
+        content.language = language
+    if market:
+        content.market = market
+    if title:
+        content.title = title
+    if metaTitle:
+        content.metaTitle = metaTitle
+    if metaDescription:
+        content.metaDescription = metaDescription
+    if metaKeywords:
+        content.metaKeywords = metaKeywords
+    if header:
+        content.header = header
+    if description:
+        content.description = description
+    if calcAmountLabel:
+        content.calcAmountLabel = calcAmountLabel
+    if calcAmountPlaceholder:
+        content.calcAmountPlaceholder = calcAmountPlaceholder
+    if calcTermLabel:
+        content.calcTermLabel = calcTermLabel
+    if calcTermPlaceholder:
+        content.calcTermPlaceholder = calcTermPlaceholder
+    if adsParagraph:
+        content.adsParagraph = adsParagraph
+    if adsImage:
+        content.adsImage = adsImage
+    if filterHeader:
+        content.filterHeader = filterHeader
+    if filterAmount:
+        content.filterAmount = filterAmount
+    if filterTerm:
+        content.filterTerm = filterTerm
+    if filterRate:
+        content.filterRate = filterRate
+    if filterPopular:
+        content.filterPopular = filterPopular
+    if footerParagraph:
+        content.footerParagraph = footerParagraph
+    if footerPartnersHeader:
+        content.footerPartnersHeader = footerPartnersHeader
+    if topTitle:
+        content.topTitle = topTitle
+    if footerLegalAddress:
+        content.footerLegalAddress = footerLegalAddress
+    if topTableColumnAmount:
+        content.topTableColumnAmount = topTableColumnAmount
+    if topTableColumnTerm:
+        content.topTableColumnTerm = topTableColumnTerm
+    if topTableColumnRate:
+        content.topTableColumnRate = topTableColumnRate
+    if reviewHeader:
+        content.reviewHeader = reviewHeader
+    if reviewFormName:
+        content.reviewFormName = reviewFormName
+    if reviewFormSelectOrganization:
+        content.reviewFormSelectOrganization = reviewFormSelectOrganization
+    if reviewFormInputPlaceholder:
+        content.reviewFormInputPlaceholder = reviewFormInputPlaceholder
+    if reviewFormRating:
+        content.reviewFormRating = reviewFormRating
+    if reviewFormButton:
+        content.reviewFormButton = reviewFormButton
+    if reviewSuccessMessage:
+        content.reviewSuccessMessage = reviewSuccessMessage
+    if reviewListHeader:
+        content.reviewListHeader = reviewListHeader
+    if reviewListLoader:
+        content.reviewListLoader = reviewListLoader
+
+    db.session.commit()
+
+    payload = {
+        "success": True,
+        "content": content
+    }
+
+    return payload
+
+
+@isAuthenticated('admin', 'editor')
+def remove_content_resolver(obj, info, id):
+    Content.query.filter(Content.id == id).delete()
+    db.session.commit()
+
+    payload = {
+        "success": True
+    }
+
+    return payload

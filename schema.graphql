@@ -36,6 +36,7 @@ type Offer {
     id: ID!
     title: String!
     logotype: String!
+    market: String!
     description: String!
     is_show: Boolean
     link: String!
@@ -84,10 +85,11 @@ type state {
 }
 
 type FAQ {
-    id: ID!,
-    language: String!,
-    answer: String!,
+    id: ID!
+    language: String!
+    answer: String!
     question: String!
+    market: String!
 }
 
 type FAQListResult {
@@ -102,15 +104,219 @@ type FAQResult {
     faq: FAQ
 }
 
+type Review {
+    id: ID!
+    name: String!
+    market: String!
+    text: String!
+    rating: Int!
+    company: Offer!
+}
+
+type ReviewsResult {
+    success: Boolean!
+    errors: [String]
+    reviews: [Review]
+}
+
+type ReviewResult {
+    success: Boolean!
+    errors: [String]
+    review: Review
+}
+
+type meta {
+    title: String!
+    description: String!
+    keywords: String!
+}
+
+type calc_input {
+    label: String!
+    placeholder: String!
+}
+
+
+type calc {
+    amount: calc_input!
+    term: calc_input!
+}
+
+type ads {
+    paragraph: String!
+    image: String!
+}
+
+type filter {
+    header: String!
+    amount: String!
+    term: String!
+    rate: String!
+    popular: String!
+}
+
+type footer {
+    paragraph: String!
+    partners_header: String!
+    legal_address: String!
+}
+
+type table_columns {
+    amount: String!
+    term: String!
+    rate: String!
+}
+
+type top {
+    title: String!
+    table_columns: table_columns!
+}
+
+type review_form {
+    name: String!
+    select_organization: String!
+    input_placeholder: String!
+    rating: String!
+    button: String!
+}
+
+type review_list {
+    header: String!
+    loader: String!
+}
+
+type review {
+    header: String!
+    form: review_form!
+    success_message: String!
+    list: review_list
+}
+
+type Content {
+    id: ID!
+    language: String!
+    market: String!
+    logotype: String!
+    title: String!
+    header: String!
+    description: String!
+    meta: meta!
+    calc: calc!
+    ads: ads!
+    filter: filter!
+    footer: footer!
+    top: top!
+    review: review
+}
+
+type ContentResult {
+    success: Boolean!
+    errors: [String!]
+    content: Content
+}
+
 type Query {
+    listReviews(market: String): ReviewsResult!
     listOffers: OffersResult!
     getOffer(id: ID!): OfferResult!
     listUsers: UsersResult!
     getUser(id: ID!): UserResult!
     listFAQ(language: String): FAQListResult!
+    getContent(market: String!): ContentResult!
 }
 
 type Mutation {
+    addReview(
+        name: String!
+        market: String!
+        text: String!
+        rating: Int!
+        company: Int!
+    ): ReviewResult
+
+    removeReview(id: ID!): state
+
+    addContent(
+        logotype: String!
+        language: String!
+        market: String!
+        title: String!
+        metaTitle: String!
+        metaDescription: String!
+        metaKeywords: String!
+        header: String!
+        description: String!
+        calcAmountLabel: String!
+        calcAmountPlaceholder: String!
+        calcTermLabel: String!
+        calcTermPlaceholder: String!
+        adsParagraph: String!
+        adsImage: String!
+        filterHeader: String!
+        filterAmount: String!
+        filterTerm: String!
+        filterRate: String!
+        filterPopular: String!
+        footerParagraph: String!
+        footerPartnersHeader: String!
+        topTitle: String!
+        footerLegalAddress: String!
+        topTableColumnAmount: String!
+        topTableColumnTerm: String!
+        topTableColumnRate: String!
+        reviewHeader: String!
+        reviewFormName: String!
+        reviewFormSelectOrganization: String!
+        reviewFormInputPlaceholder: String!
+        reviewFormRating: String!
+        reviewFormButton: String!
+        reviewSuccessMessage: String!
+        reviewListHeader: String!
+        reviewListLoader: String!
+    ): ContentResult
+
+    updateContent(
+        id: ID!
+        logotype: String
+        language: String
+        market: String
+        title: String
+        metaTitle: String
+        metaDescription: String
+        metaKeywords: String
+        header: String
+        description: String
+        calcAmountLabel: String
+        calcAmountPlaceholder: String
+        calcTermLabel: String
+        calcTermPlaceholder: String
+        adsParagraph: String
+        adsImage: String
+        filterHeader: String
+        filterAmount: String
+        filterTerm: String
+        filterRate: String
+        filterPopular: String
+        footerParagraph: String
+        footerPartnersHeader: String
+        topTitle: String
+        footerLegalAddress: String
+        topTableColumnAmount: String
+        topTableColumnTerm: String
+        topTableColumnRate: String
+        reviewHeader: String
+        reviewFormName: String
+        reviewFormSelectOrganization: String
+        reviewFormInputPlaceholder: String
+        reviewFormRating: String
+        reviewFormButton: String
+        reviewSuccessMessage: String
+        reviewListHeader: String
+        reviewListLoader: String
+    ): ContentResult
+
+    removeContent(id: ID!): state
+
     addOffer(
         title: String!,
         description: String!,

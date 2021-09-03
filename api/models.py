@@ -3,6 +3,7 @@ from api import db
 
 class Offer(db.Model):
     id = db.Column(db.Integer, primary_key=True)
+    market = db.Column(db.String)
     title = db.Column(db.String)
     logotype = db.Column(db.String)
     description = db.Column(db.Text)
@@ -29,6 +30,7 @@ class Offer(db.Model):
         return {
             "id": self.id,
             "title": self.title,
+            "market": self.market,
             "logotype": self.logotype,
             "description": self.description,
             "is_show": self.isShow,
@@ -61,6 +63,7 @@ class Offer(db.Model):
             }
         }
 
+
 class AuthKey(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     key = db.Column(db.String)
@@ -81,11 +84,138 @@ class FAQ(db.Model):
     language = db.Column(db.String)
     question = db.Column(db.String)
     answer = db.Column(db.String)
+    market = db.Column(db.String)
 
     def to_dict(self):
         return {
             "id": self.id,
             "language": self.language,
+            "market": self.market,
             "question": self.question,
             "answer": self.answer
         }
+
+
+class Content(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    logotype = db.Column(db.String)
+    language = db.Column(db.String)
+    market = db.Column(db.String)
+    title = db.Column(db.String)
+    metaTitle = db.Column(db.String)
+    metaDescription = db.Column(db.String)
+    metaKeywords = db.Column(db.String)
+    header = db.Column(db.String)
+    description = db.Column(db.String)
+    calcAmountLabel = db.Column(db.String)
+    calcAmountPlaceholder = db.Column(db.String)
+    calcTermLabel = db.Column(db.String)
+    calcTermPlaceholder = db.Column(db.String)
+    adsParagraph = db.Column(db.String)
+    adsImage = db.Column(db.String)
+    filterHeader = db.Column(db.String)
+    filterAmount = db.Column(db.String)
+    filterTerm = db.Column(db.String)
+    filterRate = db.Column(db.String)
+    filterPopular = db.Column(db.String)
+    footerParagraph = db.Column(db.String)
+    footerPartnersHeader = db.Column(db.String)
+    topTitle = db.Column(db.String)
+    footerLegalAddress = db.Column(db.String)
+    topTableColumnAmount = db.Column(db.String)
+    topTableColumnTerm = db.Column(db.String)
+    topTableColumnRate = db.Column(db.String)
+    reviewHeader = db.Column(db.String)
+    reviewFormName = db.Column(db.String)
+    reviewFormSelectOrganization = db.Column(db.String)
+    reviewFormInputPlaceholder = db.Column(db.String)
+    reviewFormRating = db.Column(db.String)
+    reviewFormButton = db.Column(db.String)
+    reviewSuccessMessage = db.Column(db.String)
+    reviewListHeader = db.Column(db.String)
+    reviewListLoader = db.Column(db.String)
+
+    def to_dict(self):
+        return {
+            "id": self.id,
+            "language": self.language,
+            "market": self.market,
+            "logotype": self.logotype,
+            "title": self.title,
+            "header": self.header,
+            "description": self.description,
+            "meta": {
+                "title": self.metaTitle,
+                "description": self.metaDescription,
+                "keywords": self.metaKeywords
+            },
+            "calc": {
+                "amount": {
+                    "label": self.calcAmountLabel,
+                    "placeholder": self.calcAmountPlaceholder,
+                },
+                "term": {
+                    "label": self.calcTermLabel,
+                    "placeholder": self.calcTermPlaceholder
+                }
+            },
+            "ads": {
+                "paragraph": self.adsParagraph,
+                "image": self.adsImage
+            },
+            "filter": {
+                "header": self.filterHeader,
+                "amount": self.filterAmount,
+                "term": self.filterTerm,
+                "rate": self.filterRate,
+                "popular": self.filterPopular
+            },
+            "footer": {
+                "paragraph": self.footerParagraph,
+                "partners_header": self.footerPartnersHeader,
+                "legal_address": self.footerLegalAddress
+            },
+            "top": {
+                "title": self.topTitle,
+                "table_columns": {
+                    "amount": self.topTableColumnAmount,
+                    "term": self.topTableColumnTerm,
+                    "rate": self.topTableColumnRate
+                }
+            },
+            "review": {
+                "header": self.reviewHeader,
+                "form": {
+                    "name": self.reviewFormName,
+                    "select_organization": self.reviewFormSelectOrganization,
+                    "input_placeholder": self.reviewFormInputPlaceholder,
+                    "rating": self.reviewFormRating,
+                    "button": self.reviewFormButton
+                },
+                "success_message": self.reviewSuccessMessage,
+                "list": {
+                    "header": self.reviewListHeader,
+                    "loader": self.reviewListLoader
+                }
+            }
+        }
+
+
+class Review(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String)
+    text = db.Column(db.Text, unique=True)
+    rating = db.Column(db.Integer)
+    company = db.Column(db.Integer, db.ForeignKey(Offer.id))
+    market = db.Column(db.String)
+
+    def to_dict(self):
+        return {
+            "id": self.id,
+            "name": self.name,
+            "market": self.market,
+            "text": self.text,
+            "rating": self.rating,
+            "company": Offer.query.get(self.company).to_dict()
+        }
+
