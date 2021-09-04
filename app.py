@@ -44,11 +44,11 @@ schema = make_executable_schema(
     type_defs, query, mutation, snake_case_fallback_resolvers
 )
 
-@app.route("/graphql", methods=["GET"])
+@app.route("/", methods=["GET"])
 def graphql_playground():
     return PLAYGROUND_HTML, 200
 
-@app.route("/graphql", methods=["POST"])
+@app.route("/", methods=["POST"])
 def graphql_server():
     data = request.get_json()
     success, result = graphql_sync(

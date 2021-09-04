@@ -2,6 +2,7 @@ from .models import *
 from ariadne import convert_kwargs_to_snake_case
 from .resolvers import isAuthenticated
 
+
 def listOffers_resolver(obj, info):
     try:
         offers = [offer.to_dict() for offer in Offer.query.all()]

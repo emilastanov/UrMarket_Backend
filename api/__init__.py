@@ -10,6 +10,3 @@ app.config["SQLALCHEMY_DATABASE_URI"] = DB_LINK
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 db = SQLAlchemy(app)
 
-@app.route("/")
-def hello_world():
-    return "<p>Hello, World!</p>"
