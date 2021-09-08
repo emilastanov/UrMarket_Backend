@@ -146,6 +146,7 @@ class Content(db.Model):
     reviewSuccessMessage = db.Column(db.String)
     reviewListHeader = db.Column(db.String)
     reviewListLoader = db.Column(db.String)
+    faqHeader = db.Column(db.String)
 
     def to_dict(self):
         return {
@@ -227,7 +228,8 @@ class Content(db.Model):
                     "header": self.reviewListHeader,
                     "loader": self.reviewListLoader
                 }
-            }
+            },
+            "faq_header": self.faqHeader
         }
 
 

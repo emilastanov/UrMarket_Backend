@@ -246,7 +246,7 @@ def add_content_resolver(obj, info, logotype, language, market, title, metaTitle
                footerPartnersHeader, topTitle, footerLegalAddress, topTableColumnAmount,topTableColumnCompany, topTableColumnTerm,
                topTableColumnRate, reviewHeader, reviewFormName, reviewFormSelectOrganization,
                reviewFormInputPlaceholder, reviewFormRating, reviewFormButton, reviewSuccessMessage, reviewListHeader,
-               reviewListLoader,offerAmount, offerTime , offerTimeUnits, offerTermUnits, offerRateUnits, offerTerm, offerRate, offerButton):
+               reviewListLoader,offerAmount, offerTime , offerTimeUnits, offerTermUnits, offerRateUnits, offerTerm, offerRate, offerButton,faqHeader):
     content = Content(logotype=logotype, language=language, market=market, title=title, metaTitle=metaTitle,
                       metaDescription=metaDescription, metaKeywords=metaKeywords, header=header,
                       description=description, calcAmountLabel=calcAmountLabel,
@@ -262,7 +262,9 @@ def add_content_resolver(obj, info, logotype, language, market, title, metaTitle
                       reviewFormInputPlaceholder=reviewFormInputPlaceholder,
                       reviewFormRating=reviewFormRating, reviewFormButton=reviewFormButton,
                       reviewSuccessMessage=reviewSuccessMessage, reviewListHeader=reviewListHeader,
-                      reviewListLoader=reviewListLoader,offerAmount=offerAmount, offerTime=offerTime , offerTimeUnits=offerTimeUnits, offerTermUnits=offerTermUnits, offerRateUnits=offerRateUnits, offerTerm=offerTerm, offerRate=offerRate, offerButton=offerButton)
+                      reviewListLoader=reviewListLoader,offerAmount=offerAmount, offerTime=offerTime ,
+                      offerTimeUnits=offerTimeUnits, offerTermUnits=offerTermUnits, offerRateUnits=offerRateUnits,
+                      offerTerm=offerTerm, offerRate=offerRate, offerButton=offerButton, faqHeader=faqHeader)
 
     db.session.add(content)
     db.session.commit()
@@ -285,9 +287,13 @@ def update_content_resolver(obj, info, id, logotype=None, language=None, market=
                             topTableColumnAmount=None, topTableColumnTerm=None,topTableColumnCompany=None, topTableColumnRate=None,
                             reviewHeader=None, reviewFormName=None, reviewFormSelectOrganization=None,
                             reviewFormInputPlaceholder=None, reviewFormRating=None, reviewFormButton=None,
-                            reviewSuccessMessage=None, reviewListHeader=None, reviewListLoader=None,offerAmount=None, offerTime=None , offerTimeUnits=None, offerTermUnits=None, offerRateUnits=None, offerTerm=None, offerRate=None, offerButton=None):
+                            reviewSuccessMessage=None, reviewListHeader=None, reviewListLoader=None,offerAmount=None,
+                            offerTime=None , offerTimeUnits=None, offerTermUnits=None, offerRateUnits=None, offerTerm=None,
+                            offerRate=None, offerButton=None, faqHeader=None):
 
     content = Content.query.get(id)
+    if faqHeader:
+        content.faqHeader = faqHeader
     if logotype:
         content.logotype = logotype
     if offerAmount:

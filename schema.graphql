@@ -224,6 +224,7 @@ type Content {
     footer: footer!
     top: top!
     review: review
+    faq_header: String!
 }
 
 type ContentResult {
@@ -262,6 +263,7 @@ type Mutation {
         metaDescription: String!
         metaKeywords: String!
         header: String!
+        faqHeader: String!
         description: String!
         calcButton: String!
         calcAmountLabel: String!
@@ -309,6 +311,7 @@ type Mutation {
         market: String
         title: String
         metaTitle: String
+        faqHeader: String
         metaDescription: String
         metaKeywords: String
         offerAmount: String
