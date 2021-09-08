@@ -101,9 +101,9 @@ def listReviews_resolver(obj, info, market=None):
         }
     return payload
 
-def getContent_resolver(obj, info, market):
+def getContent_resolver(obj, info, market, language):
     try:
-        content = Content.query.filter(Content.market == market).first()
+        content = Content.query.filter(Content.market == market).filter(Content.language == language).first()
         payload = {
             "success": True,
             "content": content.to_dict()

@@ -223,7 +223,7 @@ type Query {
     listUsers: UsersResult!
     getUser(id: ID!): UserResult!
     listFAQ(language: String): FAQListResult!
-    getContent(market: String!): ContentResult!
+    getContent(market: String!, language: String!): ContentResult!
 }
 
 type Mutation {
