@@ -111,6 +111,7 @@ class Content(db.Model):
     calcAmountPlaceholder = db.Column(db.String)
     calcTermLabel = db.Column(db.String)
     calcTermPlaceholder = db.Column(db.String)
+    calcButton = db.Column(db.String)
     adsParagraph = db.Column(db.String)
     adsImage = db.Column(db.String)
     filterHeader = db.Column(db.String)
@@ -158,7 +159,8 @@ class Content(db.Model):
                 "term": {
                     "label": self.calcTermLabel,
                     "placeholder": self.calcTermPlaceholder
-                }
+                },
+                "button": self.calcButton
             },
             "ads": {
                 "paragraph": self.adsParagraph,

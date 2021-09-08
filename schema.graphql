@@ -140,6 +140,7 @@ type calc_input {
 type calc {
     amount: calc_input!
     term: calc_input!
+    button: String!
 }
 
 type ads {
@@ -247,6 +248,7 @@ type Mutation {
         metaKeywords: String!
         header: String!
         description: String!
+        calcButton: String!
         calcAmountLabel: String!
         calcAmountPlaceholder: String!
         calcTermLabel: String!
@@ -288,6 +290,7 @@ type Mutation {
         metaKeywords: String
         header: String
         description: String
+        calcButton: String
         calcAmountLabel: String
         calcAmountPlaceholder: String
         calcTermLabel: String

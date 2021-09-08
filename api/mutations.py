@@ -239,7 +239,7 @@ def remove_review_resolver(obj, info, id):
 
 @isAuthenticated('admin', 'editor')
 def add_content_resolver(obj, info, logotype, language, market, title, metaTitle, metaDescription, metaKeywords, header,
-               description, calcAmountLabel, calcAmountPlaceholder, calcTermLabel, calcTermPlaceholder, adsParagraph,
+               description, calcAmountLabel, calcAmountPlaceholder,calcButton, calcTermLabel, calcTermPlaceholder, adsParagraph,
                adsImage, filterHeader, filterAmount, filterTerm, filterRate, filterPopular, footerParagraph,
                footerPartnersHeader, topTitle, footerLegalAddress, topTableColumnAmount,topTableColumnCompany, topTableColumnTerm,
                topTableColumnRate, reviewHeader, reviewFormName, reviewFormSelectOrganization,
@@ -248,7 +248,7 @@ def add_content_resolver(obj, info, logotype, language, market, title, metaTitle
     content = Content(logotype=logotype, language=language, market=market, title=title, metaTitle=metaTitle,
                       metaDescription=metaDescription, metaKeywords=metaKeywords, header=header,
                       description=description, calcAmountLabel=calcAmountLabel,
-                      calcAmountPlaceholder=calcAmountPlaceholder, calcTermLabel=calcTermLabel,
+                      calcAmountPlaceholder=calcAmountPlaceholder,calcButton=calcButton, calcTermLabel=calcTermLabel,
                       calcTermPlaceholder=calcTermPlaceholder, adsParagraph=adsParagraph, adsImage=adsImage,
                       filterHeader=filterHeader, filterAmount=filterAmount, filterTerm=filterTerm,
                       filterRate=filterRate, filterPopular=filterPopular, footerParagraph=footerParagraph,
@@ -276,7 +276,7 @@ def add_content_resolver(obj, info, logotype, language, market, title, metaTitle
 @isAuthenticated('admin', 'editor')
 def update_content_resolver(obj, info, id, logotype=None, language=None, market=None, title=None, metaTitle=None,
                             metaDescription=None, metaKeywords=None, header=None, description=None,
-                            calcAmountLabel=None, calcAmountPlaceholder=None, calcTermLabel=None,
+                            calcAmountLabel=None, calcAmountPlaceholder=None,calcButton=None, calcTermLabel=None,
                             calcTermPlaceholder=None, adsParagraph=None, adsImage=None, filterHeader=None,
                             filterAmount=None, filterTerm=None, filterRate=None, filterPopular=None,
                             footerParagraph=None, footerPartnersHeader=None, topTitle=None, footerLegalAddress=None,
@@ -304,6 +304,8 @@ def update_content_resolver(obj, info, id, logotype=None, language=None, market=
         content.header = header
     if description:
         content.description = description
+    if calcButton:
+        content.calcButton = calcButton
     if calcAmountLabel:
         content.calcAmountLabel = calcAmountLabel
     if calcAmountPlaceholder:
