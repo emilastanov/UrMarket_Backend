@@ -265,7 +265,7 @@ type Mutation {
         topTableColumnAmount: String!
         topTableColumnTerm: String!
         topTableColumnRate: String!
-        topTableColumnRate: String!
+        topTableColumnCompany: String!
         reviewHeader: String!
         reviewFormName: String!
         reviewFormSelectOrganization: String!
@@ -306,7 +306,7 @@ type Mutation {
         topTableColumnAmount: String
         topTableColumnTerm: String
         topTableColumnRate: String!
-        topTableColumnRate: String
+        topTableColumnCompany: String
         reviewHeader: String
         reviewFormName: String
         reviewFormSelectOrganization: String
