@@ -43,6 +43,7 @@ type offer {
     time: offer_title!
     term: offer_title!
     rate: offer_title!
+    button: String!
 }
 
 type Offer {
@@ -59,7 +60,7 @@ type Offer {
     rating: Int!
     processing_time: processingTime!
     processing_methods: [String!]
-    requirements: requirements!
+    requirements: requirements
 }
 
 type OfferResult {
@@ -276,6 +277,7 @@ type Mutation {
         offerRateUnits: String!
         offerTerm: String!
         offerRate: String!
+        offerButton: String!
         filterHeader: String!
         filterAmount: String!
         filterTerm: String!
@@ -316,6 +318,7 @@ type Mutation {
         offerRateUnits: String
         offerTerm: String
         offerRate: String
+        offerButton: String
         header: String
         description: String
         calcButton: String

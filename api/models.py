@@ -135,6 +135,7 @@ class Content(db.Model):
     offerRateUnits = db.Column(db.String)
     offerTerm = db.Column(db.String)
     offerRate = db.Column(db.String)
+    offerButton = db.Column(db.String)
     topTableColumnRate = db.Column(db.String)
     reviewHeader = db.Column(db.String)
     reviewFormName = db.Column(db.String)
@@ -198,6 +199,7 @@ class Content(db.Model):
             },
             "offer": {
                 "amount": self.offerAmount,
+                "button": self.offerButton,
                 "time": {
                     "title": self.offerTime,
                     "units": self.offerTimeUnits
