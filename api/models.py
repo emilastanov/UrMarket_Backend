@@ -128,6 +128,13 @@ class Content(db.Model):
     topTableColumnCompany = db.Column(db.String)
     topTableColumnAmount = db.Column(db.String)
     topTableColumnTerm = db.Column(db.String)
+    offerAmount = db.Column(db.String)
+    offerTime = db.Column(db.String)
+    offerTimeUnits = db.Column(db.String)
+    offerTermUnits = db.Column(db.String)
+    offerRateUnits = db.Column(db.String)
+    offerTerm = db.Column(db.String)
+    offerRate = db.Column(db.String)
     topTableColumnRate = db.Column(db.String)
     reviewHeader = db.Column(db.String)
     reviewFormName = db.Column(db.String)
@@ -187,6 +194,21 @@ class Content(db.Model):
                     "term": self.topTableColumnTerm,
                     "rate": self.topTableColumnRate,
                     "company": self.topTableColumnCompany
+                }
+            },
+            "offer": {
+                "amount": self.offerAmount,
+                "time": {
+                    "title": self.offerTime,
+                    "units": self.offerTimeUnits
+                },
+                "term": {
+                    "title": self.offerTerm,
+                    "units": self.offerTermUnits
+                },
+                "rate": {
+                    "title": self.offerRate,
+                    "units": self.offerRateUnits
                 }
             },
             "review": {

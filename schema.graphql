@@ -33,21 +33,33 @@ type requirements {
     special: String
 }
 
+type offer_title {
+    title: String!
+    units: String!
+}
+
+type offer {
+    amount: String!
+    time: offer_title!
+    term: offer_title!
+    rate: offer_title!
+}
+
 type Offer {
     id: ID!
     title: String!
     logotype: String!
     market: String!
     description: String!
-    is_show: Boolean
+    is_show: Boolean!
     link: String!
     rate: Float!
-    term: term
-    amount: amount
+    term: term!
+    amount: amount!
     rating: Int!
-    processing_time: processingTime
+    processing_time: processingTime!
     processing_methods: [String!]
-    requirements: requirements
+    requirements: requirements!
 }
 
 type OfferResult {
@@ -205,6 +217,7 @@ type Content {
     description: String!
     meta: meta!
     calc: calc!
+    offer: offer!
     ads: ads!
     filter: filter!
     footer: footer!
@@ -256,6 +269,13 @@ type Mutation {
         calcTermPlaceholder: String!
         adsParagraph: String!
         adsImage: String!
+        offerAmount: String!
+        offerTime: String!
+        offerTimeUnits: String!
+        offerTermUnits: String!
+        offerRateUnits: String!
+        offerTerm: String!
+        offerRate: String!
         filterHeader: String!
         filterAmount: String!
         filterTerm: String!
@@ -289,6 +309,13 @@ type Mutation {
         metaTitle: String
         metaDescription: String
         metaKeywords: String
+        offerAmount: String
+        offerTime: String
+        offerTimeUnits: String
+        offerTermUnits: String
+        offerRateUnits: String
+        offerTerm: String
+        offerRate: String
         header: String
         description: String
         calcButton: String
