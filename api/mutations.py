@@ -5,12 +5,12 @@ from api.resolvers import isAuthenticated
 
 
 @isAuthenticated('admin', 'editor')
-def add_offer_resolver(obj, info, title, description, logotype, link, rate, amountMin, amountMax, termMin, termMax,
+def add_offer_resolver(obj, info, title, description, logotype, link, rate, amountSymbol,amountMin, amountMax, termMin, termMax,
                        rating, processingTimeMin, processingTimeMax, processingMethods, requirementsAgeMin,
                        requirementsAgeMax, requirementsIncomeProof, requirementsDocuments,
                        requirementsUkrainNationality, requirementsSpecial=None, requirementsIncome=None):
     offer = Offer(
-        title=title, description=description, logotype=logotype, link=link, rate=rate, amountMin=amountMin,
+        title=title, description=description, logotype=logotype, link=link, rate=rate, amountSymbol=amountSymbol,amountMin=amountMin,
         amountMax=amountMax, termMin=termMin, termMax=termMax, rating=rating, processingTimeMin=processingTimeMin,
         processingTimeMax=processingTimeMax, processingMethods=processingMethods, requirementsAgeMin=requirementsAgeMin,
         requirementsAgeMax=requirementsAgeMax, requirementsIncome=requirementsIncome,
@@ -28,7 +28,7 @@ def add_offer_resolver(obj, info, title, description, logotype, link, rate, amou
 
 
 @isAuthenticated('admin', 'editor')
-def update_offer_resolver(obj, info, id, title=None, description=None, logotype=None, link=None, rate=None, amountMin=None, amountMax=None, termMin=None, termMax=None,
+def update_offer_resolver(obj, info, id, title=None, description=None, logotype=None, link=None, rate=None, amountSymbol=None, amountMin=None, amountMax=None, termMin=None, termMax=None,
                        rating=None, processingTimeMin=None, processingTimeMax=None, processingMethods=None, requirementsAgeMin=None,
                        requirementsAgeMax=None, requirementsIncomeProof=None, requirementsDocuments=None,
                        requirementsUkrainNationality=None, requirementsSpecial=None, requirementsIncome=None):
@@ -44,6 +44,8 @@ def update_offer_resolver(obj, info, id, title=None, description=None, logotype=
         offer.link = link
     if rate:
         offer.rate = rate
+    if amountSymbol:
+        offer.amountSymbol = amountSymbol
     if amountMin:
         offer.amountMin = amountMin
     if amountMax:

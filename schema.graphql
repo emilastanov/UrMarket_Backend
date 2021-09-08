@@ -11,6 +11,7 @@ type term {
 type amount {
     min: Int!
     max: Int!
+    symbol: String!
 }
 
 type processingTime {
@@ -331,6 +332,7 @@ type Mutation {
         rate: Float!,
         amountMin: Int!,
         amountMax: Int!,
+        amountSymbol: String!,
         termMin: Int!,
         termMax: Int!,
         rating: Int!,
@@ -355,6 +357,7 @@ type Mutation {
         rate: Float,
         amountMin: Int,
         amountMax: Int,
+        amountSymbol: String,
         termMin: Int,
         termMax: Int,
         rating: Int,

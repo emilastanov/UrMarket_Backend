@@ -14,6 +14,7 @@ class Offer(db.Model):
     termMax = db.Column(db.Integer)
     amountMin = db.Column(db.Integer)
     amountMax = db.Column(db.Integer)
+    amountSymbol = db.Column(db.String)
     rating = db.Column(db.Integer)
     processingTimeMin = db.Column(db.Integer)
     processingTimeMax = db.Column(db.Integer)
@@ -42,7 +43,8 @@ class Offer(db.Model):
             },
             "amount": {
                 "min": self.amountMin,
-                "max": self.amountMax
+                "max": self.amountMax,
+                "symbol": self.amountSymbol
             },
             "rating": self.rating,
             "processing_time": {
