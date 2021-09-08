@@ -219,7 +219,7 @@ type ContentResult {
 
 type Query {
     listReviews(market: String): ReviewsResult!
-    listOffers: OffersResult!
+    listOffers(market: String!): OffersResult!
     getOffer(id: ID!): OfferResult!
     listUsers: UsersResult!
     getUser(id: ID!): UserResult!

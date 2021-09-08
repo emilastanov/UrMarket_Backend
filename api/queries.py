@@ -3,9 +3,9 @@ from ariadne import convert_kwargs_to_snake_case
 from .resolvers import isAuthenticated
 
 
-def listOffers_resolver(obj, info):
+def listOffers_resolver(obj, info, market):
     try:
-        offers = [offer.to_dict() for offer in Offer.query.all()]
+        offers = [offer.to_dict() for offer in Offer.query.filter(Offer.market == market)]
         payload = {
             "success": True,
             "offers": offers
