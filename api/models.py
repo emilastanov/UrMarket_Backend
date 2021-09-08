@@ -122,6 +122,7 @@ class Content(db.Model):
     footerPartnersHeader = db.Column(db.String)
     topTitle = db.Column(db.String)
     footerLegalAddress = db.Column(db.String)
+    topTableColumnCompany = db.Column(db.String)
     topTableColumnAmount = db.Column(db.String)
     topTableColumnTerm = db.Column(db.String)
     topTableColumnRate = db.Column(db.String)
@@ -180,7 +181,8 @@ class Content(db.Model):
                 "table_columns": {
                     "amount": self.topTableColumnAmount,
                     "term": self.topTableColumnTerm,
-                    "rate": self.topTableColumnRate
+                    "rate": self.topTableColumnRate,
+                    "company": self.topTableColumnCompany
                 }
             },
             "review": {

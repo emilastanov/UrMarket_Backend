@@ -241,7 +241,7 @@ def remove_review_resolver(obj, info, id):
 def add_content_resolver(obj, info, logotype, language, market, title, metaTitle, metaDescription, metaKeywords, header,
                description, calcAmountLabel, calcAmountPlaceholder, calcTermLabel, calcTermPlaceholder, adsParagraph,
                adsImage, filterHeader, filterAmount, filterTerm, filterRate, filterPopular, footerParagraph,
-               footerPartnersHeader, topTitle, footerLegalAddress, topTableColumnAmount, topTableColumnTerm,
+               footerPartnersHeader, topTitle, footerLegalAddress, topTableColumnAmount,topTableColumnCompany, topTableColumnTerm,
                topTableColumnRate, reviewHeader, reviewFormName, reviewFormSelectOrganization,
                reviewFormInputPlaceholder, reviewFormRating, reviewFormButton, reviewSuccessMessage, reviewListHeader,
                reviewListLoader):
@@ -253,7 +253,7 @@ def add_content_resolver(obj, info, logotype, language, market, title, metaTitle
                       filterHeader=filterHeader, filterAmount=filterAmount, filterTerm=filterTerm,
                       filterRate=filterRate, filterPopular=filterPopular, footerParagraph=footerParagraph,
                       footerPartnersHeader=footerPartnersHeader, topTitle=topTitle,
-                      footerLegalAddress=footerLegalAddress, topTableColumnAmount=topTableColumnAmount,
+                      footerLegalAddress=footerLegalAddress,topTableColumnCompany=topTableColumnCompany, topTableColumnAmount=topTableColumnAmount,
                       topTableColumnTerm=topTableColumnTerm, topTableColumnRate=topTableColumnRate,
                       reviewHeader=reviewHeader, reviewFormName=reviewFormName,
                       reviewFormSelectOrganization=reviewFormSelectOrganization,
@@ -280,7 +280,7 @@ def update_content_resolver(obj, info, id, logotype=None, language=None, market=
                             calcTermPlaceholder=None, adsParagraph=None, adsImage=None, filterHeader=None,
                             filterAmount=None, filterTerm=None, filterRate=None, filterPopular=None,
                             footerParagraph=None, footerPartnersHeader=None, topTitle=None, footerLegalAddress=None,
-                            topTableColumnAmount=None, topTableColumnTerm=None, topTableColumnRate=None,
+                            topTableColumnAmount=None, topTableColumnTerm=None,topTableColumnCompany=None, topTableColumnRate=None,
                             reviewHeader=None, reviewFormName=None, reviewFormSelectOrganization=None,
                             reviewFormInputPlaceholder=None, reviewFormRating=None, reviewFormButton=None,
                             reviewSuccessMessage=None, reviewListHeader=None, reviewListLoader=None):
@@ -336,6 +336,8 @@ def update_content_resolver(obj, info, id, logotype=None, language=None, market=
         content.footerLegalAddress = footerLegalAddress
     if topTableColumnAmount:
         content.topTableColumnAmount = topTableColumnAmount
+    if topTableColumnCompany:
+        content.topTableColumnCompany = topTableColumnCompany
     if topTableColumnTerm:
         content.topTableColumnTerm = topTableColumnTerm
     if topTableColumnRate:
