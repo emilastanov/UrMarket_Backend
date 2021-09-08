@@ -224,7 +224,7 @@ type Query {
     getOffer(id: ID!): OfferResult!
     listUsers: UsersResult!
     getUser(id: ID!): UserResult!
-    listFAQ(language: String): FAQListResult!
+    listFAQ(language: String, market: String): FAQListResult!
     getContent(market: String!, language: String!): ContentResult!
 }
 
@@ -390,14 +390,16 @@ type Mutation {
     addFAQ(
         language: String!,
         answer: String!,
-        question: String!
+        question: String!,
+        market: String!
     ): FAQResult
 
     updateFAQ(
         id: ID!,
         language: String,
         answer: String,
-        question: String
+        question: String,
+        market: String
     ): FAQResult
 
     removeFAQ(

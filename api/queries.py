@@ -66,10 +66,10 @@ def getUser_resolver(obj, info, id):
     return payload
 
 
-def listFAQ_resolver(obj,info, language=None):
+def listFAQ_resolver(obj,info, language=None, market=None):
     try:
-        if language:
-            faqs = [faq.to_dict() for faq in FAQ.query.filter(FAQ.language == language)]
+        if language and market:
+            faqs = [faq.to_dict() for faq in FAQ.query.filter(FAQ.language == language).filter(FAQ.market == market)]
         else:
             faqs = [faq.to_dict() for faq in FAQ.query.all()]
         payload = {
