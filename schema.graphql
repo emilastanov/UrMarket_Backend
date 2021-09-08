@@ -26,9 +26,9 @@ type age {
 
 type requirements {
     age: age
-    income: Int!
-    income_proof: Boolean!
-    documents: [String!]
+    income: Int
+    income_proof: Boolean
+    documents: [String]
     ukrain_nationality: Boolean
     special: String
 }
