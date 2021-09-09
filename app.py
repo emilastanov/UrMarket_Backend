@@ -22,6 +22,7 @@ query.set_field("getUser", getUser_resolver)
 query.set_field("listFAQ", listFAQ_resolver)
 query.set_field("listReviews", listReviews_resolver)
 query.set_field("getContent", getContent_resolver)
+query.set_field("login", login_resolver)
 
 mutation.set_field("addOffer", add_offer_resolver)
 mutation.set_field('updateOffer', update_offer_resolver)

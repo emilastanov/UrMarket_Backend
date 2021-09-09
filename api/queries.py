@@ -17,6 +17,26 @@ def listOffers_resolver(obj, info, market):
         }
     return payload
 
+def login_resolver(obj,info,key):
+    try:
+        user = AuthKey.query.filter(AuthKey.key == key)
+        if user.count() == 0:
+            payload = {
+                "success": False,
+                "errors": ["Bad auth key"]
+            }
+        else:
+            payload = {
+                "success": True,
+                "user": user.first().to_dict()
+            }
+    except Exception as error:
+        payload = {
+            "success": False,
+            "errors": [str(error)]
+        }
+    return payload
+
 def getOffer_resolver(obj, info, id):
     try:
         offer = Offer.query.get(id)

@@ -241,6 +241,7 @@ type Query {
     getUser(id: ID!): UserResult!
     listFAQ(language: String, market: String): FAQListResult!
     getContent(market: String!, language: String!): ContentResult!
+    login(key: String!): UserResult!
 }
 
 type Mutation {
