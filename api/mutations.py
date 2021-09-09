@@ -8,14 +8,14 @@ from api.resolvers import isAuthenticated
 def add_offer_resolver(obj, info, title, description, logotype, link, rate, amountSymbol,amountMin, amountMax, termMin, termMax,
                        rating, processingTimeMin, processingTimeMax, processingMethods, requirementsAgeMin,
                        requirementsAgeMax, requirementsIncomeProof, requirementsDocuments,
-                       requirementsUkrainNationality, requirementsSpecial=None, requirementsIncome=None):
+                       requirementsUkrainNationality, isShow, requirementsSpecial=None, requirementsIncome=None):
     offer = Offer(
         title=title, description=description, logotype=logotype, link=link, rate=rate, amountSymbol=amountSymbol,amountMin=amountMin,
         amountMax=amountMax, termMin=termMin, termMax=termMax, rating=rating, processingTimeMin=processingTimeMin,
         processingTimeMax=processingTimeMax, processingMethods=processingMethods, requirementsAgeMin=requirementsAgeMin,
         requirementsAgeMax=requirementsAgeMax, requirementsIncome=requirementsIncome,
         requirementsIncomeProof=requirementsIncomeProof, requirementsDocuments=requirementsDocuments,
-        requirementsUkrainNationality=requirementsUkrainNationality, requirementsSpecial=requirementsSpecial
+        requirementsUkrainNationality=requirementsUkrainNationality, requirementsSpecial=requirementsSpecial, isShow=isShow
     )
     db.session.add(offer)
     db.session.commit()
@@ -31,9 +31,11 @@ def add_offer_resolver(obj, info, title, description, logotype, link, rate, amou
 def update_offer_resolver(obj, info, id, title=None, description=None, logotype=None, link=None, rate=None, amountSymbol=None, amountMin=None, amountMax=None, termMin=None, termMax=None,
                        rating=None, processingTimeMin=None, processingTimeMax=None, processingMethods=None, requirementsAgeMin=None,
                        requirementsAgeMax=None, requirementsIncomeProof=None, requirementsDocuments=None,
-                       requirementsUkrainNationality=None, requirementsSpecial=None, requirementsIncome=None):
+                       requirementsUkrainNationality=None, requirementsSpecial=None, requirementsIncome=None, isShow=None):
 
     offer = Offer.query.get(id)
+    if isShow:
+        offer.isShow = isShow
     if title:
         offer.title = title
     if description:
