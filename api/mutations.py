@@ -34,7 +34,7 @@ def update_offer_resolver(obj, info, id, title=None, description=None, logotype=
                        requirementsUkrainNationality=None, requirementsSpecial=None, requirementsIncome=None, isShow=None):
 
     offer = Offer.query.get(id)
-    if isShow:
+    if isShow is True or isShow is False:
         offer.isShow = isShow
     if title:
         offer.title = title
