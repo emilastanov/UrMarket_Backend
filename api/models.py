@@ -27,6 +27,7 @@ class Offer(db.Model):
     requirementsDocuments = db.Column(db.Text)
     requirementsUkrainNationality = db.Column(db.Boolean)
     requirementsSpecial = db.Column(db.Text)
+    child = relationship("Review", backref="parent", passive_deletes=True)
 
     def to_dict(self):
         return {
@@ -239,10 +240,9 @@ class Review(db.Model):
     name = db.Column(db.String)
     text = db.Column(db.Text, unique=True)
     rating = db.Column(db.Integer)
-    company = db.Column(db.Integer, db.ForeignKey(Offer.id))
+    company = db.Column(db.Integer, db.ForeignKey(Offer.id, ondelete='CASCADE'))
     market = db.Column(db.String)
 
-    parent = relationship(Offer, backref=backref("children", cascade="all,delete"))
 
     def to_dict(self):
         return {
