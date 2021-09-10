@@ -1,4 +1,5 @@
 from api import db
+from sqlalchemy.orm import relationship
 
 
 class Offer(db.Model):
@@ -26,6 +27,8 @@ class Offer(db.Model):
     requirementsDocuments = db.Column(db.Text)
     requirementsUkrainNationality = db.Column(db.Boolean)
     requirementsSpecial = db.Column(db.Text)
+
+    children = relationship("Review", cascade="all,delete", backref="parent")
 
     def to_dict(self):
         return {
