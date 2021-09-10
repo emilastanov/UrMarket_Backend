@@ -1,5 +1,5 @@
 from api import db
-from sqlalchemy.orm import relationship
+from sqlalchemy.orm import relationship,backref
 
 
 class Offer(db.Model):
@@ -27,8 +27,6 @@ class Offer(db.Model):
     requirementsDocuments = db.Column(db.Text)
     requirementsUkrainNationality = db.Column(db.Boolean)
     requirementsSpecial = db.Column(db.Text)
-
-    children = relationship("Review", cascade="all,delete", backref="parent")
 
     def to_dict(self):
         return {
@@ -243,6 +241,8 @@ class Review(db.Model):
     rating = db.Column(db.Integer)
     company = db.Column(db.Integer, db.ForeignKey(Offer.id))
     market = db.Column(db.String)
+
+    parent = relationship(Offer, backref=backref("children", cascade="all,delete"))
 
     def to_dict(self):
         return {
