@@ -107,9 +107,9 @@ def listFAQ_resolver(obj,info, language=None, market=None):
 def listReviews_resolver(obj, info, market=None):
     try:
         if market:
-            reviews = [review.to_dict() for review in Review.query.filter(Review.market == market)]
+            reviews = [review.to_dict() for review in Review.query.filter(Review.market == market).order_by(Review.id.desc())]
         else:
-            reviews = [review.to_dict() for review in Review.query.all()]
+            reviews = [review.to_dict() for review in Review.query.all().order_by(Review.id.desc())]
         payload = {
             "success": True,
             "reviews": reviews
