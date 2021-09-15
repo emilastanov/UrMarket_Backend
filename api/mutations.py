@@ -187,11 +187,12 @@ def update_user_resolver(obj, info, id,name):
 
 
 @isAuthenticated('admin', 'editor')
-def add_faq_resolver(obj, info, language, question, answer):
+def add_faq_resolver(obj, info, language, question, answer, market):
     faq = FAQ(
         language=language,
         question=question,
-        answer=answer
+        answer=answer,
+        market=market
     )
 
     db.session.add(faq)
