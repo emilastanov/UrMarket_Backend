@@ -233,6 +233,25 @@ type ContentResult {
     content: Content
 }
 
+type Market {
+    id: Int!
+    value: String!
+    description: String!
+    active: Boolean!
+}
+
+type MarketsResult {
+    success: Boolean!
+    errors: [String!]
+    markets: [Market]
+}
+
+type MarketResult {
+    success: Boolean!
+    errors: [String!]
+    market: Market
+}
+
 type Query {
     listReviews(market: String): ReviewsResult!
     listOffers(market: String!): OffersResult!
@@ -242,9 +261,17 @@ type Query {
     listFAQ(language: String, market: String): FAQListResult!
     getContent(market: String!, language: String!): ContentResult!
     login(key: String!): UserResult!
+    listMarkets: MarketsResult!
 }
 
 type Mutation {
+    addMarket (
+        value: String!
+        description: String!
+    ): MarketResult
+
+    removeMarket (id: Int!): state
+
     addReview(
         name: String!
         market: String!

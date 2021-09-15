@@ -4,6 +4,37 @@ from random import randrange
 from api.resolvers import isAuthenticated
 
 
+@isAuthenticated('admin')
+def add_market_resolver(obj, info, value, description):
+    market = Market(
+        value=value,
+        description=description,
+        active=False
+    )
+
+    db.session.add(market)
+    db.session.commit()
+
+    payload = {
+        "success": True,
+        "market": market.to_dict()
+    }
+
+    return payload
+
+
+@isAuthenticated('admin')
+def remove_market_resolver(obj, info, id):
+    Market.query.filter(Market.id == id).delete()
+    db.session.commit()
+
+    payload = {
+        "success": True
+    }
+
+    return payload
+
+
 @isAuthenticated('admin', 'editor')
 def add_offer_resolver(obj, info, title, description, logotype, link, rate, amountSymbol,amountMin, amountMax, termMin, termMax,
                        rating, processingTimeMin, processingTimeMax, processingMethods, requirementsAgeMin,

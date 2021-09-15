@@ -254,3 +254,17 @@ class Review(db.Model):
             "company": Offer.query.get(self.company).to_dict()
         }
 
+
+class Market(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    value = db.Column(db.String)
+    description = db.Column(db.String)
+    active = db.Column(db.Boolean)
+
+    def to_dict(self):
+        return {
+            "id": self.id,
+            "value": self.value,
+            "description": self.description,
+            "active": self.active
+        }

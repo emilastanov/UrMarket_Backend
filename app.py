@@ -23,6 +23,7 @@ query.set_field("listFAQ", listFAQ_resolver)
 query.set_field("listReviews", listReviews_resolver)
 query.set_field("getContent", getContent_resolver)
 query.set_field("login", login_resolver)
+query.set_field("listMarkets", listMarkets_resolver)
 
 mutation.set_field("addOffer", add_offer_resolver)
 mutation.set_field('updateOffer', update_offer_resolver)
@@ -38,6 +39,9 @@ mutation.set_field("removeReview", remove_review_resolver)
 mutation.set_field("addContent", add_content_resolver)
 mutation.set_field("updateContent", update_content_resolver)
 mutation.set_field("removeContent", remove_content_resolver)
+mutation.set_field("addMarket", add_market_resolver)
+mutation.set_field("removeMarket", remove_market_resolver)
+
 
 
 type_defs = load_schema_from_path("schema.graphql")
@@ -66,3 +70,9 @@ def upload_img():
     cloudinary.config(**CLOUDINARY)
     link = cloudinary.uploader.upload(request.files['image'])['url'].split('/')
     return jsonify({"out": '/'.join(link[:-2]+['w_400,h_200,c_fill']+link[-2:])})
+
+
+@app.route("/git", methods=["POST"])
+def git_hook():
+
+    return "ok"

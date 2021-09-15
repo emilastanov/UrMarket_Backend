@@ -136,3 +136,20 @@ def getContent_resolver(obj, info, market, language):
 
     return payload
 
+
+def listMarkets_resolver(obj, info):
+    try:
+        markets = [market.to_dict() for market in Market.query.all()]
+        payload = {
+            "success": True,
+            "markets": markets
+        }
+    except Exception as error:
+        payload = {
+            "success": False,
+            "errors": [str(error)]
+        }
+
+    return payload
+
+
