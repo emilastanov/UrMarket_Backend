@@ -233,6 +233,12 @@ type ContentResult {
     content: Content
 }
 
+type ContentsResult {
+    success: Boolean!
+    errors: [String!]
+    contents: [Content]
+}
+
 type Market {
     id: Int!
     value: String!
@@ -260,6 +266,7 @@ type Query {
     getUser(id: ID!): UserResult!
     listFAQ(language: String, market: String): FAQListResult!
     getContent(market: String!, language: String!): ContentResult!
+    listContent(market: String!): ContentsResult!
     login(key: String!): UserResult!
     listMarkets: MarketsResult!
 }

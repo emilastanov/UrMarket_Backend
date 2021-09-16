@@ -137,6 +137,22 @@ def getContent_resolver(obj, info, market, language):
     return payload
 
 
+def listContent_resolver(obj, info, market):
+    try:
+        contents = [content.to_dict() for content in Content.query.filter(Content.market == market)]
+        payload = {
+            "success": True,
+            "contents": contents
+        }
+    except Exception as error:
+        payload = {
+            "success": False,
+            "errors": [str(error)]
+        }
+
+    return payload
+
+
 def listMarkets_resolver(obj, info):
     try:
         markets = [market.to_dict() for market in Market.query.all()]
