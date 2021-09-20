@@ -260,7 +260,7 @@ type MarketResult {
 
 type Query {
     listReviews(market: String): ReviewsResult!
-    listOffers(market: String!): OffersResult!
+    listOffers(market: String!, main: Boolean): OffersResult!
     getOffer(id: ID!): OfferResult!
     listUsers: UsersResult!
     getUser(id: ID!): UserResult!
