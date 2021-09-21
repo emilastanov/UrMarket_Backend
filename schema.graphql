@@ -430,6 +430,7 @@ type Mutation {
         amountSymbol: String,
         termMin: Int,
         termMax: Int,
+        market: String!,
         rating: Int,
         isShow: Boolean,
         processingTimeMin: Int,
