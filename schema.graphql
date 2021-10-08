@@ -127,6 +127,21 @@ type Review {
     company: Offer!
 }
 
+type CreditCardReview {
+    id: ID!
+    name: String!
+    market: String!
+    text: String!
+    rating: Int!
+    card: CreditCard!
+}
+
+type CreditCardReviewsResult {
+    success: Boolean!
+    errors: [String]
+    reviews: [CreditCardReview]
+}
+
 type ReviewsResult {
     success: Boolean!
     errors: [String]
@@ -258,7 +273,49 @@ type MarketResult {
     market: Market
 }
 
+type salaryRequirements {
+    minimum_salary: Int!
+    minimum_salary_main_regions: Int!
+    main_regions: [String!]
+}
+
+type CreditCard {
+    id: ID!
+    title: String!
+    logotype: String!
+    link: String!
+    is_show: Boolean!
+    rating: Int!
+    market: String!
+    description: String!
+    grace_period: Int!
+    rate: Float!
+    service_payment: Int!
+    credit_limit: Int!
+    credit_docs: String!
+    age: age!
+    only_individual: Boolean!
+    minimum_work_experience: Int!
+    minimum_current_work_experience: Int!
+    salary: salaryRequirements!
+}
+
+type CreditCardOffersResult {
+    success: Boolean!
+    errors: [String!]
+    credit_cards: [CreditCard]
+}
+
+type CreditCardOfferResult {
+    success: Boolean!
+    errors: [String!]
+    credit_card: CreditCard
+}
+
 type Query {
+    listCreditCardOffers(market: String!, main: Boolean): CreditCardOffersResult!
+    getCreditCardOffer(id: ID!): CreditCardOfferResult!
+    listCreditCardReviews(market: String): CreditCardReviewsResult!
     listReviews(market: String): ReviewsResult!
     listOffers(market: String!, main: Boolean): OffersResult!
     getOffer(id: ID!): OfferResult!
@@ -272,6 +329,69 @@ type Query {
 }
 
 type Mutation {
+    addCreditCardOffer(
+        title: String!
+        logotype: String!
+        isShow: Boolean!
+        market: String!
+        rating: Int!
+        link: String!
+        description: String!
+        gracePeriod: Int!
+        rate: Float!
+        servicePayment: Int!
+        creditLimit: Int!
+        creditDocs: String!
+        ageMin: Int!
+        ageMax: Int!
+        onlyIndividual: Boolean!
+        minimumWorkExperience: Int!
+        minimumCurrentWorkExperience:Int!
+        salaryMinimumSalary: Int!
+        salaryMinimumSalaryMainRegions:Int!
+        salaryMainRegions: String!
+    ): CreditCardOfferResult
+
+    updateCreditCardOffer(
+        id: ID!
+        title: String
+        logotype: String
+        rating: Int
+        isShow: Boolean
+        market: String
+        link: String
+        description: String
+        gracePeriod: Int
+        rate: Float
+        servicePayment: Int
+        creditLimit: Int
+        creditDocs: String
+        ageMin: Int
+        ageMax: Int
+        onlyIndividual: Boolean
+        minimumWorkExperience: Int
+        minimumCurrentWorkExperience:Int
+        salaryMinimumSalary: Int
+        salaryMinimumSalaryMainRegions:Int
+        salaryMainRegions: String
+    ): CreditCardOfferResult
+
+    removeCreditCardOffer(
+        id: ID!
+    ): state
+
+    addCreditCardReview(
+        name: String!
+        market: String!
+        text: String!
+        rating: Int!
+        card: Int!
+    ): ReviewResult
+
+    removeCreditCardReview(
+        id: ID!
+    ): state
+
     addMarket (
         value: String!
         description: String!

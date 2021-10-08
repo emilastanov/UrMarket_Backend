@@ -444,3 +444,188 @@ def remove_content_resolver(obj, info, id):
     }
 
     return payload
+
+
+@isAuthenticated('admin','editor')
+def add_credit_card_offer_resolver(
+        obj,
+        info,
+        title,
+        logotype,
+        isShow,
+        market,
+        rating,
+        link,
+        description,
+        gracePeriod,
+        rate,
+        servicePayment,
+        creditLimit,
+        creditDocs,
+        ageMin,
+        ageMax,
+        onlyIndividual,
+        minimumWorkExperience,
+        minimumCurrentWorkExperience,
+        salaryMinimumSalary,
+        salaryMinimumSalaryMainRegions,
+        salaryMainRegions
+):
+    offer = CreditCardOffer(
+        title=title,
+        logotype=logotype,
+        isShow=isShow,
+        rating=rating,
+        market=market,
+        link=link,
+        description=description,
+        gracePeriod=gracePeriod,
+        rate=rate,
+        servicePayment=servicePayment,
+        creditLimit=creditLimit,
+        creditDocs=creditDocs,
+        ageMin=ageMin,
+        ageMax=ageMax,
+        onlyIndividual=onlyIndividual,
+        minimumWorkExperience=minimumWorkExperience,
+        minimumCurrentWorkExperience=minimumCurrentWorkExperience,
+        salaryMinimumSalary=salaryMinimumSalary,
+        salaryMinimumSalaryMainRegions=salaryMinimumSalaryMainRegions,
+        salaryMainRegions=salaryMainRegions
+
+    )
+    db.session.add(offer)
+    db.session.commit()
+    payload = {
+        "success": True,
+        "credit_card": offer.to_dict()
+    }
+
+    return payload
+
+
+@isAuthenticated('admin','editor')
+def update_credit_card_offer_resolver(
+        obj,
+        info,
+        id,
+        title=None,
+        logotype=None,
+        isShow=None,
+        rating=None,
+        market=None,
+        link=None,
+        description=None,
+        gracePeriod=None,
+        rate=None,
+        servicePayment=None,
+        creditLimit=None,
+        creditDocs=None,
+        ageMin=None,
+        ageMax=None,
+        onlyIndividual=None,
+        minimumWorkExperience=None,
+        minimumCurrentWorkExperience=None,
+        salaryMinimumSalary=None,
+        salaryMinimumSalaryMainRegions=None,
+        salaryMainRegions=None
+):
+    offer = CreditCardOffer.query.get(id)
+    if title:
+        offer.title = title
+    if rating:
+        offer.rating = rating
+    if logotype:
+        offer.logotype = logotype
+    if isShow:
+        offer.isShow = isShow
+    if market:
+        offer.market = market
+    if link:
+        offer.link = link
+    if description:
+        offer.description = description
+    if gracePeriod:
+        offer.gracePeriod = gracePeriod
+    if rate:
+        offer.rate = rate
+    if servicePayment:
+        offer.servicePayment = servicePayment
+    if creditLimit:
+        offer.creditLimit = creditLimit
+    if creditDocs:
+        offer.creditDocs = creditDocs
+    if ageMin:
+        offer.ageMin = ageMin
+    if ageMax:
+        offer.ageMax = ageMax
+    if onlyIndividual:
+        offer.onlyIndividual = onlyIndividual
+    if minimumWorkExperience:
+        offer.minimumWorkExperience = minimumWorkExperience
+    if minimumCurrentWorkExperience:
+        offer.minimumCurrentWorkExperience = minimumCurrentWorkExperience
+    if salaryMinimumSalary:
+        offer.salaryMinimumSalary = salaryMinimumSalary
+    if salaryMinimumSalaryMainRegions:
+        offer.salaryMinimumSalaryMainRegions = salaryMinimumSalaryMainRegions
+    if salaryMainRegions:
+        offer.salaryMainRegions = salaryMainRegions
+
+    db.session.commit()
+
+    payload = {
+        "success": True,
+        "credit_card": offer
+    }
+
+    return payload
+
+
+@isAuthenticated('admin', 'editor')
+def remove_credit_card_offer_resolver(obj, info, id):
+    CreditCardOffer.query.filter(CreditCardOffer.id == id).delete()
+    db.session.commit()
+
+    payload = {
+        "success": True
+    }
+
+    return payload
+
+
+def add_credit_card_review_resolver(obj, info, name, market, text, rating, card):
+    if CreditCardReview.query.filter(CreditCardReview.text == text).count():
+        payload = {
+            "success": False,
+            "errors": ["Dublicated"]
+        }
+    else:
+        review = CreditCardReview(name=name, market=market, text=text, rating=rating, card=card)
+        db.session.add(review)
+        db.session.commit()
+        payload = {
+            "success": True,
+            "review": {
+                "id": review.id,
+                "text": review.text,
+                "rating": review.rating,
+                "market": review.market,
+                "name": review.name,
+                "card": CreditCardOffer.query.get(review.card)
+            }
+        }
+
+    return payload
+
+
+@isAuthenticated('admin', 'editor')
+def remove_credit_card_review_resolver(obj, info, id):
+    CreditCardReview.query.filter(CreditCardReview.id == id).delete()
+    db.session.commit()
+
+    payload = {
+        "success": True
+    }
+
+    return payload

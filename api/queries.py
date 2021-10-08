@@ -6,7 +6,8 @@ from .resolvers import isAuthenticated
 def listOffers_resolver(obj, info, market, main=False):
     try:
         if main:
-            offers = [offer.to_dict() for offer in Offer.query.filter(Offer.market == market).filter(Offer.isShow == True)]
+            offers = [offer.to_dict() for offer in
+                      Offer.query.filter(Offer.market == market).filter(Offer.isShow == True)]
         else:
             offers = [offer.to_dict() for offer in Offer.query.filter(Offer.market == market)]
         payload = {
@@ -20,7 +21,8 @@ def listOffers_resolver(obj, info, market, main=False):
         }
     return payload
 
-def login_resolver(obj,info,key):
+
+def login_resolver(obj, info, key):
     try:
         user = AuthKey.query.filter(AuthKey.key == key)
         if user.count() == 0:
@@ -40,24 +42,25 @@ def login_resolver(obj,info,key):
         }
     return payload
 
+
 def getOffer_resolver(obj, info, id):
     try:
         offer = Offer.query.get(id)
-        print(offer.to_dict())
+
         payload = {
             "success": True,
             "offer": offer.to_dict()
         }
-    except AttributeError:  # todo not found
+    except AttributeError:
         payload = {
             "success": False,
-            "errors": ["Post item matching {id} not found"]
+            "errors": [f"Post item matching {id} not found"]
         }
     return payload
 
 
 @isAuthenticated('admin')
-def listUsers_resolver(obj,info):
+def listUsers_resolver(obj, info):
     try:
         users = [user.to_dict() for user in AuthKey.query.all()]
         payload = {
@@ -89,7 +92,7 @@ def getUser_resolver(obj, info, id):
     return payload
 
 
-def listFAQ_resolver(obj,info, language=None, market=None):
+def listFAQ_resolver(obj, info, language=None, market=None):
     try:
         if language and market:
             faqs = [faq.to_dict() for faq in FAQ.query.filter(FAQ.language == language).filter(FAQ.market == market)]
@@ -110,7 +113,8 @@ def listFAQ_resolver(obj,info, language=None, market=None):
 def listReviews_resolver(obj, info, market=None):
     try:
         if market:
-            reviews = [review.to_dict() for review in Review.query.filter(Review.market == market).order_by(Review.id.desc())]
+            reviews = [review.to_dict() for review in
+                       Review.query.filter(Review.market == market).order_by(Review.id.desc())]
         else:
             reviews = [review.to_dict() for review in Review.query.all().order_by(Review.id.desc())]
         payload = {
@@ -123,6 +127,7 @@ def listReviews_resolver(obj, info, market=None):
             "errors": [str(error)]
         }
     return payload
+
 
 def getContent_resolver(obj, info, market, language):
     try:
@@ -172,3 +177,62 @@ def listMarkets_resolver(obj, info):
     return payload
 
 
+def listCreditCardOffers_resolver(obj, info, market, main=False):
+    try:
+        credit_cards = [
+            creditCard.to_dict() for creditCard in CreditCardOffer.query.filter(
+                CreditCardOffer.market == market
+            ).filter(
+                CreditCardOffer.isShow == True
+            )
+        ] if main else [
+            creditCard.to_dict() for creditCard in CreditCardOffer.query.filter(
+                CreditCardOffer.market == market
+            )
+        ]
+        payload = {
+            "success": True,
+            "credit_cards": credit_cards
+        }
+    except Exception as error:
+        payload = {
+            "success": False,
+            "errors": [str(error)]
+        }
+
+    return payload
+
+
+def getCreditCardOffer_resolver(obj, info, id):
+    try:
+        credit_card = CreditCardOffer.query.get(id)
+
+        payload = {
+            "success": True,
+            "credit_card": credit_card.to_dict()
+        }
+    except AttributeError:
+        payload = {
+            "success": False,
+            "errors": [f"Post item matching {id} not found"]
+        }
+    return payload
+
+
+def listCreditCardReviews_resolver(obj, info, market=None):
+    try:
+        if market:
+            reviews = [review.to_dict() for review in
+                       CreditCardReview.query.filter(CreditCardReview.market == market).order_by(CreditCardReview.id.desc())]
+        else:
+            reviews = [review.to_dict() for review in CreditCardReview.query.all().order_by(CreditCardReview.id.desc())]
+        payload = {
+            "success": True,
+            "reviews": reviews
+        }
+    except Exception as error:
+        payload = {
+            "success": False,
+            "errors": [str(error)]
+        }
+    return payload

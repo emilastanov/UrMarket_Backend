@@ -25,6 +25,9 @@ query.set_field("getContent", getContent_resolver)
 query.set_field("login", login_resolver)
 query.set_field("listMarkets", listMarkets_resolver)
 query.set_field('listContent', listContent_resolver)
+query.set_field('listCreditCardOffers', listCreditCardOffers_resolver)
+query.set_field('getCreditCardOffer', getCreditCardOffer_resolver)
+query.set_field('listCreditCardReviews', listCreditCardReviews_resolver)
 
 mutation.set_field("addOffer", add_offer_resolver)
 mutation.set_field('updateOffer', update_offer_resolver)
@@ -42,6 +45,11 @@ mutation.set_field("updateContent", update_content_resolver)
 mutation.set_field("removeContent", remove_content_resolver)
 mutation.set_field("addMarket", add_market_resolver)
 mutation.set_field("removeMarket", remove_market_resolver)
+mutation.set_field("addCreditCardOffer", add_credit_card_offer_resolver)
+mutation.set_field("updateCreditCardOffer", update_credit_card_offer_resolver)
+mutation.set_field("removeCreditCardOffer", remove_credit_card_offer_resolver)
+mutation.set_field("addCreditCardReview", add_credit_card_review_resolver)
+mutation.set_field("removeCreditCardReview", remove_credit_card_review_resolver)
 
 
 

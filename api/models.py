@@ -1,3 +1,5 @@
+import json
+
 from api import db
 from sqlalchemy.orm import relationship,backref
 
@@ -267,4 +269,76 @@ class Market(db.Model):
             "value": self.value,
             "description": self.description,
             "active": self.active
+        }
+
+
+class CreditCardOffer(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.String)
+    logotype = db.Column(db.String)
+    isShow = db.Column(db.Boolean)
+    rating = db.Column(db.Integer)
+    market = db.Column(db.String)
+    link = db.Column(db.String)
+    description = db.Column(db.String)
+    gracePeriod = db.Column(db.Integer)
+    rate = db.Column(db.Float)
+    servicePayment = db.Column(db.Integer)
+    creditLimit = db.Column(db.Integer)
+    creditDocs = db.Column(db.String)
+    ageMin = db.Column(db.Integer)
+    ageMax = db.Column(db.Integer)
+    onlyIndividual = db.Column(db.Boolean)
+    minimumWorkExperience = db.Column(db.Integer)
+    minimumCurrentWorkExperience = db.Column(db.Integer)
+    salaryMinimumSalary = db.Column(db.Integer)
+    salaryMinimumSalaryMainRegions = db.Column(db.Integer)
+    salaryMainRegions = db.Column(db.String)
+
+    def to_dict(self):
+        return {
+            "id": self.id,
+            "title": self.title,
+            "logotype": self.logotype,
+            "link": self.link,
+            "rating": self.rating,
+            "is_show": self.isShow,
+            "market": self.market,
+            "description": self.description,
+            "grace_period": self.gracePeriod,
+            "rate": self.rate,
+            "service_payment": self.servicePayment,
+            "credit_limit": self.creditLimit,
+            "credit_docs": self.creditDocs,
+            "age": {
+                "min": self.ageMin,
+                "max": self.ageMax
+            },
+            "only_individual": self.onlyIndividual,
+            "minimum_work_experience": self.minimumWorkExperience,
+            "minimum_current_work_experience": self.minimumCurrentWorkExperience,
+            "salary": {
+                "minimum_salary": self.salaryMinimumSalary,
+                "minimum_salary_main_regions": self.salaryMinimumSalaryMainRegions,
+                "main_regions": json.loads(self.salaryMainRegions)
+            }
+        }
+
+
+class CreditCardReview(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String)
+    text = db.Column(db.Text, unique=True)
+    rating = db.Column(db.Integer)
+    card = db.Column(db.Integer, db.ForeignKey(CreditCardOffer.id, ondelete='CASCADE'))
+    market = db.Column(db.String)
+
+    def to_dict(self):
+        return {
+            "id": self.id,
+            "name": self.name,
+            "market": self.market,
+            "text": self.text,
+            "rating": self.rating,
+            "card": CreditCardOffer.query.get(self.card).to_dict()
         }
