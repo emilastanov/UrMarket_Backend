@@ -282,7 +282,7 @@ type salaryRequirements {
 type CreditCard {
     id: ID!
     title: String!
-    cash_fee: Float!
+    cash_withdrawal: String!
     card_type: String!
     logotype: String!
     link: String!
@@ -335,7 +335,7 @@ type Mutation {
         title: String!
         logotype: String!
         isShow: Boolean!
-        cashFee: Float!
+        cashWithdrawal: String!
         cardType: String!
         market: String!
         rating: Int!
@@ -359,7 +359,7 @@ type Mutation {
     updateCreditCardOffer(
         id: ID!
         title: String
-        cashFee: Float
+        cashWithdrawal: String
         cardType: String
         logotype: String
         rating: Int
