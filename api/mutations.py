@@ -469,7 +469,9 @@ def add_credit_card_offer_resolver(
         minimumCurrentWorkExperience,
         salaryMinimumSalary,
         salaryMinimumSalaryMainRegions,
-        salaryMainRegions
+        salaryMainRegions,
+        cashFee,
+        cardType
 ):
     offer = CreditCardOffer(
         title=title,
@@ -491,7 +493,9 @@ def add_credit_card_offer_resolver(
         minimumCurrentWorkExperience=minimumCurrentWorkExperience,
         salaryMinimumSalary=salaryMinimumSalary,
         salaryMinimumSalaryMainRegions=salaryMinimumSalaryMainRegions,
-        salaryMainRegions=salaryMainRegions
+        salaryMainRegions=salaryMainRegions,
+        cashFee=cashFee,
+        cardType=cardType
 
     )
     db.session.add(offer)
@@ -528,9 +532,15 @@ def update_credit_card_offer_resolver(
         minimumCurrentWorkExperience=None,
         salaryMinimumSalary=None,
         salaryMinimumSalaryMainRegions=None,
-        salaryMainRegions=None
+        salaryMainRegions=None,
+        cashFee=None,
+        cardType=None
 ):
     offer = CreditCardOffer.query.get(id)
+    if cashFee:
+        offer.cashFee = cashFee
+    if cardType:
+        offer.cardType = cardType
     if title:
         offer.title = title
     if rating:

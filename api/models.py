@@ -294,10 +294,14 @@ class CreditCardOffer(db.Model):
     salaryMinimumSalary = db.Column(db.Integer)
     salaryMinimumSalaryMainRegions = db.Column(db.Integer)
     salaryMainRegions = db.Column(db.String)
+    cardType = db.Column(db.String)
+    cashFee = db.Column(db.Float)
 
     def to_dict(self):
         return {
             "id": self.id,
+            "card_type": self.cardType,
+            "cash_fee": self.cashFee,
             "title": self.title,
             "logotype": self.logotype,
             "link": self.link,
