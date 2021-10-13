@@ -586,7 +586,7 @@ def update_credit_card_offer_resolver(
 
     payload = {
         "success": True,
-        "credit_card": offer
+        "credit_card": offer.to_dict()
     }
 
     return payload
