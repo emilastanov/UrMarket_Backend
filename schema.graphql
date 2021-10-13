@@ -285,6 +285,7 @@ type CreditCard {
     cash_withdrawal: String!
     card_type: String!
     logotype: String!
+    amount_symbol: String!
     link: String!
     is_show: Boolean!
     rating: Int!
@@ -333,6 +334,7 @@ type Query {
 type Mutation {
     addCreditCardOffer(
         title: String!
+        amountSymbol: String!
         logotype: String!
         isShow: Boolean!
         cashWithdrawal: String!
@@ -359,6 +361,7 @@ type Mutation {
     updateCreditCardOffer(
         id: ID!
         title: String
+        amountSymbol: String
         cashWithdrawal: String
         cardType: String
         logotype: String

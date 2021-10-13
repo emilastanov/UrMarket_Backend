@@ -454,6 +454,7 @@ def add_credit_card_offer_resolver(
         logotype,
         isShow,
         market,
+        amountSymbol,
         rating,
         link,
         description,
@@ -479,6 +480,7 @@ def add_credit_card_offer_resolver(
         isShow=isShow,
         rating=rating,
         market=market,
+        amountSymbol=amountSymbol,
         link=link,
         description=description,
         gracePeriod=gracePeriod,
@@ -515,6 +517,7 @@ def update_credit_card_offer_resolver(
         id,
         title=None,
         logotype=None,
+        amountSymbol=None,
         isShow=None,
         rating=None,
         market=None,
@@ -537,6 +540,8 @@ def update_credit_card_offer_resolver(
         cardType=None
 ):
     offer = CreditCardOffer.query.get(id)
+    if amountSymbol:
+        offer.amountSymbol = amountSymbol
     if cashWithdrawal:
         offer.cashWithdrawal = cashWithdrawal
     if cardType:

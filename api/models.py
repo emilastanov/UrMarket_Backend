@@ -279,6 +279,7 @@ class CreditCardOffer(db.Model):
     isShow = db.Column(db.Boolean)
     rating = db.Column(db.Integer)
     market = db.Column(db.String)
+    amountSymbol = db.Column(db.String)
     link = db.Column(db.String)
     description = db.Column(db.String)
     gracePeriod = db.Column(db.Integer)
@@ -304,6 +305,7 @@ class CreditCardOffer(db.Model):
             "cash_withdrawal": self.cashWithdrawal,
             "title": self.title,
             "logotype": self.logotype,
+            "amount_symbol": self.amountSymbol,
             "link": self.link,
             "rating": self.rating,
             "is_show": self.isShow,
