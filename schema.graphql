@@ -276,7 +276,7 @@ type MarketResult {
 type salaryRequirements {
     minimum_salary: Int!
     minimum_salary_main_regions: Int!
-    main_regions: [String!]
+    main_regions: String!
 }
 
 type CreditCard {
