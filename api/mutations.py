@@ -547,7 +547,7 @@ def update_credit_card_offer_resolver(
         offer.rating = rating
     if logotype:
         offer.logotype = logotype
-    if isShow:
+    if isShow is True or isShow is False:
         offer.isShow = isShow
     if market:
         offer.market = market
