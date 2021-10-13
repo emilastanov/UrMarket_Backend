@@ -470,7 +470,7 @@ def add_credit_card_offer_resolver(
         salaryMinimumSalary,
         salaryMinimumSalaryMainRegions,
         salaryMainRegions,
-        cashFee,
+        cashWithdrawal,
         cardType
 ):
     offer = CreditCardOffer(
@@ -494,7 +494,7 @@ def add_credit_card_offer_resolver(
         salaryMinimumSalary=salaryMinimumSalary,
         salaryMinimumSalaryMainRegions=salaryMinimumSalaryMainRegions,
         salaryMainRegions=salaryMainRegions,
-        cashFee=cashFee,
+        cashWithdrawal=cashWithdrawal,
         cardType=cardType
 
     )
@@ -533,12 +533,12 @@ def update_credit_card_offer_resolver(
         salaryMinimumSalary=None,
         salaryMinimumSalaryMainRegions=None,
         salaryMainRegions=None,
-        cashFee=None,
+        cashWithdrawal=None,
         cardType=None
 ):
     offer = CreditCardOffer.query.get(id)
-    if cashFee:
-        offer.cashFee = cashFee
+    if cashWithdrawal:
+        offer.cashWithdrawal = cashWithdrawal
     if cardType:
         offer.cardType = cardType
     if title:
