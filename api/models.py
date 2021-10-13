@@ -326,7 +326,7 @@ class CreditCardOffer(db.Model):
             "salary": {
                 "minimum_salary": self.salaryMinimumSalary,
                 "minimum_salary_main_regions": self.salaryMinimumSalaryMainRegions,
-                "main_regions": json.loads(self.salaryMainRegions)
+                "main_regions": self.salaryMainRegions
             }
         }
 
