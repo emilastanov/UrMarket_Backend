@@ -315,7 +315,25 @@ type CreditCardOfferResult {
     credit_card: CreditCard
 }
 
+type gracePeriod {
+    min: Int!
+    max: Int!
+}
+
+type CreditCardFilters {
+    amount: amount!
+    grace_period: gracePeriod!
+    card_types: [String!]
+}
+
+type CreditCardFiltersResult {
+    success: Boolean!
+    errors: [String!]
+    filters: CreditCardFilters
+}
+
 type Query {
+    getCreditCardFilters(market: String!): CreditCardFiltersResult!
     listCreditCardOffers(market: String!, main: Boolean): CreditCardOffersResult!
     getCreditCardOffer(id: ID!): CreditCardOfferResult!
     listCreditCardReviews(market: String): CreditCardReviewsResult!

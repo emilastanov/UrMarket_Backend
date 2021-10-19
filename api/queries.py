@@ -236,3 +236,36 @@ def listCreditCardReviews_resolver(obj, info, market=None):
             "errors": [str(error)]
         }
     return payload
+
+
+def getCreditCardFilters_resolver(obj, info, market):
+    try:
+        creditCards = [creditCard.to_dict() for creditCard in CreditCardOffer.query.filter(CreditCardOffer.market == market)]
+        cardTypes = []
+        for creditCard in creditCards:
+            if not creditCard['card_type'] in cardTypes:
+                cardTypes.append(creditCard['card_type'])
+        cardGracePeriods = [creditCard['grace_period'] for creditCard in creditCards]
+        gracePeriod = {
+            "min": min(cardGracePeriods),
+            "max": max(cardGracePeriods)
+        }
+        cardAmounts = [creditCard['credit_limit'] for creditCard in creditCards]
+        amount = {
+            "min": min(cardAmounts),
+            "max": max(cardAmounts)
+        }
+        payload = {
+            "success": True,
+            "filters": {
+                "amount": amount,
+                "grace_period": gracePeriod,
+                "card_types": cardTypes
+            }
+        }
+    except Exception as error:
+        payload = {
+            "success": False,
+            "errors": [str(error)]
+        }
+    return payload

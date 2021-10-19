@@ -28,6 +28,7 @@ query.set_field('listContent', listContent_resolver)
 query.set_field('listCreditCardOffers', listCreditCardOffers_resolver)
 query.set_field('getCreditCardOffer', getCreditCardOffer_resolver)
 query.set_field('listCreditCardReviews', listCreditCardReviews_resolver)
+query.set_field('getCreditCardFilters', getCreditCardFilters_resolver)
 
 mutation.set_field("addOffer", add_offer_resolver)
 mutation.set_field('updateOffer', update_offer_resolver)
