@@ -292,7 +292,7 @@ type CreditCard {
     market: String!
     description: String!
     grace_period: Int!
-    rate: Float!
+    rate: String!
     service_payment: Int!
     credit_limit: Int!
     credit_docs: String!
@@ -362,7 +362,7 @@ type Mutation {
         link: String!
         description: String!
         gracePeriod: Int!
-        rate: Float!
+        rate: String!
         servicePayment: Int!
         creditLimit: Int!
         creditDocs: String!
@@ -389,7 +389,7 @@ type Mutation {
         link: String
         description: String
         gracePeriod: Int
-        rate: Float
+        rate: String
         servicePayment: Int
         creditLimit: Int
         creditDocs: String
