@@ -283,7 +283,7 @@ class CreditCardOffer(db.Model):
     link = db.Column(db.String)
     description = db.Column(db.String)
     gracePeriod = db.Column(db.Integer)
-    rate = db.Column(db.Float)
+    rate = db.Column(db.String)
     servicePayment = db.Column(db.Integer)
     creditLimit = db.Column(db.Integer)
     creditDocs = db.Column(db.String)
